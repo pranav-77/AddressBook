@@ -11,7 +11,8 @@ public class AddressBookMain {
             System.out.println("Choose one option");
             System.out.println("1. Add Contact Details");
             System.out.println("2. Review Contact Details");
-            System.out.println("3. Exit");
+            System.out.println("3. Edit Existing Contact");
+            System.out.println("4. Exit");
             int choice=sc.nextInt();
             switch (choice){
                 case 1:
@@ -42,6 +43,17 @@ public class AddressBookMain {
                     break;
                 }
                 case 3:
+                {
+                    System.out.println("Enter the first name:");
+                    String editFirstName=sc.next();
+
+                    System.out.println("Enter the last name:");
+                    String editLastName=sc.next();
+
+                    addressBook.editContact(editFirstName,editLastName,sc);
+                    break;
+                }
+                case 4:
                 {
                     System.out.println("Exiting....");
                     System.exit(0);
