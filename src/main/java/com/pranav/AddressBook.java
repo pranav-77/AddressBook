@@ -11,6 +11,8 @@ public class AddressBook {
     }
 
     public void displayContacts(){
+        if (contacts.isEmpty())
+            System.out.println("There is no contacts available to see");
         for (Contact contact:contacts)
             System.out.println(contact);
     }
