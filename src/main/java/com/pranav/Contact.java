@@ -12,7 +12,7 @@ public class Contact {
     private String phoneNumber;
     private String email;
 
-    public Contact(String firstName, String lastName, String address, String state, String city, String zip, String phoneNumber, String email) {
+    public Contact(String firstName, String lastName, String address, String city, String state, String zip, String phoneNumber, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -23,40 +23,12 @@ public class Contact {
         this.email = email;
     }
 
-    private boolean validateName(String name) {
-        return Pattern.matches("[A-Z][a-z]{1,15}+", name);
-    }
-
-    private boolean validateAddress(String address) {
-        return Pattern.matches("[A-Za-z0-9\\s,.]{5,25}+", address);
-    }
-
-    private boolean validateCityAndState(String cityAndState) {
-        return Pattern.matches("[A-Z][a-z]{1,10}+", cityAndState);
-    }
-
-    private boolean validateZip(String zip) {
-        return Pattern.matches("[0-9]{6}+", zip);
-    }
-
-    private boolean validatePhoneNumber(String phoneNumber) {
-        return Pattern.matches("91\\s[6-9]\\d{9}$", phoneNumber);
-    }
-
-    private boolean validateEmail(String email) {
-        return Pattern.matches("[a-zA-Z0-9_.*+-]+@[a-zA-Z]+.[a-z]+$", email);
-    }
-
-
     public String getFirstName() {
         return firstName;
     }
 
     public void setFirstName(String firstName) {
-        if (validateEmail(firstName))
-            this.firstName = firstName;
-        else
-            System.out.println("Invalid Input");
+        this.firstName = firstName;
     }
 
     public String getLastName() {
