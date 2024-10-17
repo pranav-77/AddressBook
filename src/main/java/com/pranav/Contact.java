@@ -86,8 +86,8 @@ public class Contact {
     }
 
     @Override
-    public String toString(){
-        return "Contact Details:\n"+firstName+" "+lastName+"\n"+address+"\n"+city+"\n"+state+"\n"+zip+"\n"+phoneNumber+"\n"+email+"\n";
+    public String toString() {
+        return "Contact Details:\n" + firstName + " " + lastName + "\n" + address + "\n" + city + "\n" + state + "\n" + zip + "\n" + phoneNumber + "\n" + email + "\n";
     }
 }
 
