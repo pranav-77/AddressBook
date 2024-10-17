@@ -52,17 +52,17 @@ public class AddressBookMain {
                     break;
                 }
                 case 4: {
-                    System.out.println("Enter First Name");
+                    System.out.println("Enter the First Name");
                     String deleteFirstName = sc.next();
 
-                    System.out.println("Enter Last Name");
+                    System.out.println("Enter the Last Name");
                     String deleteLastName = sc.next();
 
                     addressBook.deleteContact(deleteFirstName, deleteLastName);
                     break;
                 }
                 case 5: {
-                    System.out.println("Exiting....");
+                    System.out.println("Exiting Program....");
                     System.exit(0);
                 }
                 default:

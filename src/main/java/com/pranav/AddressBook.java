@@ -6,19 +6,20 @@ import java.util.Scanner;
 
 public class AddressBook {
     private List<Contact> contacts = new ArrayList<>();
-
+    static int count=0;
 //    public AddressBook(){
 //        this.contacts=new ArrayList<>();
 //    }
 
     public void addContact(Contact contact) {
         contacts.add(contact);
+        count++;
         System.out.println("Contact Added Successfully");
     }
 
     public void displayContacts() {
         if (contacts.isEmpty())
-            System.out.println("There is no contacts available to see");
+            System.out.println("The Contacts List is Empty Add Some Contacts By Choosing Option 1");
         for (Contact contact : contacts)
             System.out.println(contact);
     }
@@ -26,7 +27,7 @@ public class AddressBook {
     public void editContact(String firstName, String lastName, Scanner sc) {
         Contact contact = findContact(firstName, lastName);
         if (contact == null)
-            System.out.println("Contact not found");
+            System.out.println("Contact not found in this name please check whether the typed name is right");
         else {
             System.out.println("Editing Contact Details");
             System.out.println();
@@ -61,7 +62,7 @@ public class AddressBook {
                 contact.setEmail(newEmail);
 
             System.out.println();
-            System.out.println("Updated Successfully...");
+            System.out.println("Contact Updated Successfully...");
         }
     }
 
@@ -71,15 +72,18 @@ public class AddressBook {
             System.out.println("Contact not found");
         else {
             contacts.remove(contact);
-            System.out.println("Contact Removed Successfully...");
+            count--;
+            System.out.println("Contact Deleted Successfully...");
         }
     }
 
-    private Contact findContact(String firstName, String lastName) {
+    public Contact findContact(String firstName, String lastName) {
         for (Contact contact : contacts) {
             if (contact.getFirstName().equalsIgnoreCase(firstName) && contact.getLastName().equalsIgnoreCase(lastName))
                 return contact;
         }
         return null;
     }
+
+
 }
