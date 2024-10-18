@@ -19,62 +19,54 @@ public class AddressBookMain {
             switch (choice) {
                 case 1: {
                     while (true) {
-                        System.out.println("Enter First Name");
+                        System.out.println("Enter First Name eg:Alan");
                         String firstName = sc.next();
                         if (!Pattern.matches("^[A-Z][a-zA-Z]{1,}$", firstName)) {
-                            System.out.println("Invalid First Name");
+                            System.out.println("Invalid First Name -Check the given eg");
                             continue;
                         }
-
-                        System.out.println("Enter Last Name");
+                        System.out.println("Enter Last Name eg:John");
                         String lastName = sc.next();
                         if (!Pattern.matches("^[A-Z][a-zA-Z]{1,}$", lastName)) {
-                            System.out.println("Invalid Last Name");
+                            System.out.println("Invalid Last Name -Check the given eg");
                             continue;
                         }
-
-                        System.out.println("Enter Address Name");
+                        System.out.println("Enter Address eg: 5th,Street-HSR");
                         String address = sc.next();
                         if (!Pattern.matches("^[a-zA-Z0-9\\s,.-]+$", address)) {
-                            System.out.println("Invalid Address Input");
+                            System.out.println("Invalid Address Input -Check the given eg");
                             continue;
                         }
-
-                        System.out.println("Enter City");
+                        System.out.println("Enter City eg: Bangalore");
                         String city = sc.next();
                         if (!Pattern.matches("^[a-zA-Z\\s]+$", city)) {
-                            System.out.println("Invalid City Input");
+                            System.out.println("Invalid City Input -Check the given eg");
                             continue;
-
                         }
-
-                        System.out.println("Enter State");
+                        System.out.println("Enter State eg: Karnataka");
                         String state = sc.next();
                         if (!Pattern.matches("^[a-zA-Z\\s]+$", state)) {
-                            System.out.println("Invalid State Input");
+                            System.out.println("Invalid State Input -Check the given eg");
                             continue;
                         }
-
-                        System.out.println("Enter Zip");
+                        System.out.println("Enter Zip eg: 564534");
                         String zip = sc.next();
                         if (!Pattern.matches("^[0-9]{6}$", zip)) {
-                            System.out.println("Invalid Zip Input");
+                            System.out.println("Invalid Zip Input -Check the given eg");
                             continue;
                         }
-
-                        System.out.println("Enter Phone number");
+                        System.out.println("Enter Phone number eg: 9876543210");
                         String phoneNumber = sc.next();
                         if (!Pattern.matches("[6-9]\\d{9}$", phoneNumber)) {
-                            System.out.println("Invalid Phone Number");
+                            System.out.println("Invalid Phone Number -Check the given eg");
                             continue;
                         }
-                        System.out.println("Enter Mail");
+                        System.out.println("Enter Mail eg: hello@gmail.com");
                         String email = sc.next();
                         if (!Pattern.matches("^[a-zA-Z0-9_.*+-]+@[a-zA-Z]+.[a-z]+$", email)) {
-                            System.out.println("Invalid Mail");
+                            System.out.println("Invalid Mail -Check the given eg");
                             continue;
                         }
-
                         Contact contact = new Contact(firstName, lastName, address, state, city, zip, phoneNumber, email);
                         addressBook.addContact(contact);
                         break;
