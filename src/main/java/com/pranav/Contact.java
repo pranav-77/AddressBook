@@ -1,7 +1,5 @@
 package com.pranav;
 
-import java.util.regex.Pattern;
-
 public class Contact {
     private String firstName;
     private String lastName;
