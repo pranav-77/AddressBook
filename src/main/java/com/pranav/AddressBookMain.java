@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class AddressBookMain {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ContactException {
         AddressBook addressBook = new AddressBook();
         Scanner sc = new Scanner(System.in);
         System.out.println("Welcome to the Address Book");
@@ -19,57 +19,45 @@ public class AddressBookMain {
             switch (choice) {
                 case 1: {
                     while (true) {
-                        System.out.println("Enter First Name eg:Alan");
-                        String firstName = sc.next();
-                        if (!Pattern.matches("^[A-Z][a-zA-Z]{1,}$", firstName)) {
-                            System.out.println("Invalid First Name -Check the given eg");
-                            continue;
+                        try {
+                            System.out.println("Enter First Name eg:Alan");
+                            String firstName = sc.next();
+                            validateName(firstName);
+
+                            System.out.println("Enter Last Name eg:John");
+                            String lastName = sc.next();
+                            validateName(lastName);
+
+                            System.out.println("Enter Address eg: 5th,Street-HSR");
+                            String address = sc.next();
+                            validateAddress(address);
+
+                            System.out.println("Enter City eg: Bangalore");
+                            String city = sc.next();
+                            validateCityAndState(city);
+
+                            System.out.println("Enter State eg: Karnataka");
+                            String state = sc.next();
+                            validateCityAndState(state);
+
+                            System.out.println("Enter Zip eg: 564534");
+                            String zip = sc.next();
+                            validateZip(zip);
+
+                            System.out.println("Enter Phone number eg: 9876543210");
+                            String phoneNumber = sc.next();
+                            validatePhoneNumber(phoneNumber);
+
+                            System.out.println("Enter Mail eg: hello@gmail.com");
+                            String email = sc.next();
+                            validateEmail(email);
+
+                            Contact contact = new Contact(firstName, lastName, address, state, city, zip, phoneNumber, email);
+                            addressBook.addContact(contact);
+                            break;
+                        } catch (ContactException e) {
+                            System.out.println(e.getMessage() + " Please Try Again...");
                         }
-                        System.out.println("Enter Last Name eg:John");
-                        String lastName = sc.next();
-                        if (!Pattern.matches("^[A-Z][a-zA-Z]{1,}$", lastName)) {
-                            System.out.println("Invalid Last Name -Check the given eg");
-                            continue;
-                        }
-                        System.out.println("Enter Address eg: 5th,Street-HSR");
-                        String address = sc.next();
-                        if (!Pattern.matches("^[a-zA-Z0-9\\s,.-]+$", address)) {
-                            System.out.println("Invalid Address Input -Check the given eg");
-                            continue;
-                        }
-                        System.out.println("Enter City eg: Bangalore");
-                        String city = sc.next();
-                        if (!Pattern.matches("^[a-zA-Z\\s]+$", city)) {
-                            System.out.println("Invalid City Input -Check the given eg");
-                            continue;
-                        }
-                        System.out.println("Enter State eg: Karnataka");
-                        String state = sc.next();
-                        if (!Pattern.matches("^[a-zA-Z\\s]+$", state)) {
-                            System.out.println("Invalid State Input -Check the given eg");
-                            continue;
-                        }
-                        System.out.println("Enter Zip eg: 564534");
-                        String zip = sc.next();
-                        if (!Pattern.matches("^[0-9]{6}$", zip)) {
-                            System.out.println("Invalid Zip Input -Check the given eg");
-                            continue;
-                        }
-                        System.out.println("Enter Phone number eg: 9876543210");
-                        String phoneNumber = sc.next();
-                        if (!Pattern.matches("[6-9]\\d{9}$", phoneNumber)) {
-                            System.out.println("Invalid Phone Number -Check the given eg");
-                            continue;
-                        }
-                        System.out.println("Enter Mail eg: hello@gmail.com");
-                        String email = sc.next();
-                        if (!Pattern.matches("^[a-zA-Z0-9_.*+-]+@[a-zA-Z]+.[a-z]+$", email)) {
-                            System.out.println("Invalid Mail -Check the given eg");
-                            continue;
-                        }
-                        Contact contact = new Contact(firstName, lastName, address, state, city, zip, phoneNumber, email);
-                        addressBook.addContact(contact);
-                        break;
                     }
                     break;
                 }
@@ -101,5 +89,35 @@ public class AddressBookMain {
                     System.out.println("Invalid input");
             }
         }
+    }
+
+    public static void validateName(String name) throws ContactException {
+        if (!Pattern.matches("^[A-Z][a-zA-Z]{1,}$", name))
+            throw new ContactException("Invalid Name -Check the given eg");
+    }
+
+    public static void validateAddress(String address) throws ContactException {
+        if (!Pattern.matches("^[a-zA-Z0-9\\s,.-]+$", address))
+            throw new ContactException("Invalid Address -Check the given eg");
+    }
+
+    public static void validateCityAndState(String cityAndState) throws ContactException {
+        if (!Pattern.matches("^[a-zA-Z\\s]+$", cityAndState))
+            throw new ContactException("Invalid input  -Check the given eg");
+    }
+
+    public static void validateZip(String zip) throws ContactException {
+        if (!Pattern.matches("^[0-9]{6}$", zip))
+            throw new ContactException("Invalid Zip Code  -Check the given eg");
+    }
+
+    public static void validatePhoneNumber(String phoneNumber) throws ContactException {
+        if (!Pattern.matches("[6-9]\\d{9}$", phoneNumber))
+            throw new ContactException("Invalid Phone number  -Check the given eg");
+    }
+
+    public static void validateEmail(String mail) throws ContactException {
+        if (!Pattern.matches("^[a-zA-Z0-9_.*+-]+@[a-zA-Z]+.[a-z]+$", mail))
+            throw new ContactException("Invalid Mail id  -Check the given eg");
     }
 }

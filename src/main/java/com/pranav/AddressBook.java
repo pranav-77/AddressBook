@@ -33,72 +33,48 @@ public class AddressBook {
         return null;
     }
 
-    public void editContact(String firstName, String lastName, Scanner sc) {
+    public void editContact(String firstName, String lastName, Scanner sc) throws ContactException {
         Contact contact = findContact(firstName, lastName);
         if (contact == null)
             System.out.println("Contact not found in this name please check whether the typed name is correct");
         else {
             System.out.println("Editing Contact Details");
-            boolean flag = true;
-            while (flag) {
-                System.out.println();
-                System.out.println("Enter new address eg: 5,HSR-Layout");
-                String newAddress = sc.next();
-                if (Pattern.matches("^[a-zA-Z0-9\\s,.-]+$", newAddress)) {
+            while (true) {
+                try {
+                    System.out.println();
+                    System.out.println("Enter new address eg: 5,HSR-Layout");
+                    String newAddress = sc.next();
+                    validateAddress(newAddress);
                     contact.setAddress(newAddress);
-                    flag = false;
-                } else
-                    System.out.println("Invalid Address Input -check the given eg");
-            }
-            flag = true;
-            while (flag) {
-                System.out.println("Enter new city eg: Bangalore");
-                String newCity = sc.next();
-                if (Pattern.matches("^[a-zA-Z\\s]+$", newCity)) {
+
+                    System.out.println("Enter new city eg: Bangalore");
+                    String newCity = sc.next();
+                    validateCityAndState(newCity);
                     contact.setCity(newCity);
-                    flag = false;
-                } else
-                    System.out.println("Invalid City Input -check the given eg");
-            }
-            flag = true;
-            while (flag) {
-                System.out.println("Enter new state eg: Karnataka");
-                String newState = sc.next();
-                if (Pattern.matches("^[a-zA-Z\\s]+$", newState)) {
+
+                    System.out.println("Enter new state eg: Karnataka");
+                    String newState = sc.next();
+                    validateCityAndState(newState);
                     contact.setState(newState);
-                    flag = false;
-                } else
-                    System.out.println("Invalid State Input -check the given eg");
-            }
-            flag = true;
-            while (flag) {
-                System.out.println("Enter new zip eg:676765");
-                String newZip = sc.next();
-                if (Pattern.matches("^[0-9]{6}$", newZip)) {
+
+                    System.out.println("Enter new zip eg:676765");
+                    String newZip = sc.next();
+                    validateZip(newZip);
                     contact.setZip(newZip);
-                    flag = false;
-                } else
-                    System.out.println("Invalid Zip Code Input -check the given eg");
-            }
-            flag = true;
-            while (flag) {
-                System.out.println("Enter new phone number eg: 9090987867");
-                String newPhoneNumber = sc.next();
-                if (Pattern.matches("[6-9]\\d{9}$", newPhoneNumber)) {
+
+                    System.out.println("Enter new phone number eg: 9090987867");
+                    String newPhoneNumber = sc.next();
+                    validatePhoneNumber(newPhoneNumber);
                     contact.setPhoneNumber(newPhoneNumber);
-                    flag = false;
-                } else
-                    System.out.println("Invalid Phone Number Input -check the given eg");
-            }
-            flag = true;
-            while (flag) {
-                System.out.println("Enter new email eg: hello@gmail.com");
-                String newEmail = sc.next();
-                if (Pattern.matches("^[a-zA-Z0-9_.*+-]+@[a-zA-Z]+.[a-z]+$", newEmail)) {
+
+                    System.out.println("Enter new email eg: hello@gmail.com");
+                    String newEmail = sc.next();
+                    validateEmail(newEmail);
                     contact.setEmail(newEmail);
-                    flag = false;
-                } else
-                    System.out.println("Invalid Email Input -check the given eg");
+                    break;
+                } catch (ContactException e) {
+                    System.out.println(e.getMessage() + " Please try again...");
+                }
             }
             System.out.println();
             System.out.println("Contact Updated Successfully...");
@@ -114,5 +90,30 @@ public class AddressBook {
             count--;
             System.out.println("Contact Deleted Successfully...");
         }
+    }
+
+    public static void validateAddress(String address) throws ContactException {
+        if (!Pattern.matches("^[a-zA-Z0-9\\s,.-]+$", address))
+            throw new ContactException("Invalid Address -Check the given eg");
+    }
+
+    public static void validateCityAndState(String cityAndState) throws ContactException {
+        if (!Pattern.matches("^[a-zA-Z\\s]+$", cityAndState))
+            throw new ContactException("Invalid input  -Check the given eg");
+    }
+
+    public static void validateZip(String zip) throws ContactException {
+        if (!Pattern.matches("^[0-9]{6}$", zip))
+            throw new ContactException("Invalid Zip Code  -Check the given eg");
+    }
+
+    public static void validatePhoneNumber(String phoneNumber) throws ContactException {
+        if (!Pattern.matches("[6-9]\\d{9}$", phoneNumber))
+            throw new ContactException("Invalid Phone number  -Check the given eg");
+    }
+
+    public static void validateEmail(String mail) throws ContactException {
+        if (!Pattern.matches("^[a-zA-Z0-9_.*+-]+@[a-zA-Z]+.[a-z]+$", mail))
+            throw new ContactException("Invalid Mail id  -Check the given eg");
     }
 }
