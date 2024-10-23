@@ -1,20 +1,88 @@
 package com.pranav;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class AddressBookMain {
+    private static Map<String, AddressBook> addressBooks = new HashMap<>();
+
     public static void main(String[] args) throws ContactException {
-        AddressBook addressBook = new AddressBook();
         Scanner sc = new Scanner(System.in);
         System.out.println("Welcome to the Address Book");
+        while (true) {
+            System.out.println("Choose Option");
+            System.out.println("1. Add new Address Book");
+            System.out.println("2. Select an existing Address Book");
+            System.out.println("3. Display all Address Book");
+            System.out.println("4. Display the contacts of a Particular AddressBook");
+            System.out.println("5. Exit");
+            int choice = sc.nextInt();
+            sc.nextLine();
+            switch (choice) {
+                case 1: {
+                    System.out.println("Enter Address Book Name");
+                    String bookName = sc.nextLine();
+                    if (addressBooks.containsKey(bookName)) {
+                        System.out.println("Already Book Exists in this same name");
+                    } else {
+                        addressBooks.put(bookName, new AddressBook());
+                        System.out.println("New Address Book " + bookName + " is created");
+                    }
+                    break;
+                }
+                case 2: {
+                    System.out.println("Enter the Address Book you want to manage");
+                    String selectedBook = sc.nextLine();
+                    AddressBook addressBook = addressBooks.get(selectedBook);
+                    if (addressBook != null) {
+                        manageAddressBook(sc, addressBook);
+                    } else {
+                        System.out.println("Not Address Book found in given name");
+                    }
+                    break;
+                }
+                case 3: {
+                    if (addressBooks.isEmpty()) {
+                        System.out.println("No Address Books Present Please Add One");
+                    } else {
+                        System.out.println("Existing Address Book");
+                        for (String name : addressBooks.keySet()) {
+                            System.out.println(name);
+                        }
+                    }
+                    break;
+                }
+                case 4: {
+                    System.out.println("Enter the Address Book name that you need Contact details");
+                    String addressBookToView = sc.nextLine();
+                    AddressBook addressBook = addressBooks.get(addressBookToView);
+                    if (addressBook != null) {
+                        addressBook.displayContacts();
+                    } else {
+                        System.out.println("Address Book Not Found!");
+                    }
+                    break;
+                }
+                case 5: {
+                    System.out.println("Exiting Program...");
+                    System.exit(0);
+                }
+                default:
+                    System.out.println("Invalid input Please enter correct option");
+            }
+        }
+    }
+
+    public static void manageAddressBook(Scanner sc, AddressBook addressBook) throws ContactException {
         while (true) {
             System.out.println("Choose one option");
             System.out.println("1. Add Contact Details");
             System.out.println("2. Review Contact Details");
             System.out.println("3. Edit Existing Contact");
             System.out.println("4. Delete Existing Contact");
-            System.out.println("5. Exit");
+            System.out.println("5. Back to Main Menu");
             int choice = sc.nextInt();
             switch (choice) {
                 case 1: {
@@ -82,8 +150,8 @@ public class AddressBookMain {
                     break;
                 }
                 case 5: {
-                    System.out.println("Exiting Program....");
-                    System.exit(0);
+                    System.out.println("Backing To Main Menu");
+                    return;
                 }
                 default:
                     System.out.println("Invalid input");
