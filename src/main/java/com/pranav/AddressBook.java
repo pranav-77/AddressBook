@@ -21,8 +21,9 @@ public class AddressBook {
     public void displayContacts() {
         if (contacts.isEmpty())
             System.out.println("The Contacts List is Empty Add Some Contacts By Choosing Option 1");
-        for (Contact contact : contacts)
+        for (Contact contact : contacts) {
             System.out.println(contact);
+        }
     }
 
     public Contact findContact(String firstName, String lastName) {
@@ -44,32 +45,32 @@ public class AddressBook {
                     System.out.println();
                     System.out.println("Enter new address eg: 5,HSR-Layout");
                     String newAddress = sc.next();
-                    validateAddress(newAddress);
+                    AddressBookMain.validateAddress(newAddress);
                     contact.setAddress(newAddress);
 
                     System.out.println("Enter new city eg: Bangalore");
                     String newCity = sc.next();
-                    validateCityAndState(newCity);
+                    AddressBookMain.validateCityAndState(newCity);
                     contact.setCity(newCity);
 
                     System.out.println("Enter new state eg: Karnataka");
                     String newState = sc.next();
-                    validateCityAndState(newState);
+                    AddressBookMain.validateCityAndState(newState);
                     contact.setState(newState);
 
                     System.out.println("Enter new zip eg:676765");
                     String newZip = sc.next();
-                    validateZip(newZip);
+                    AddressBookMain.validateZip(newZip);
                     contact.setZip(newZip);
 
                     System.out.println("Enter new phone number eg: 9090987867");
                     String newPhoneNumber = sc.next();
-                    validatePhoneNumber(newPhoneNumber);
+                    AddressBookMain.validatePhoneNumber(newPhoneNumber);
                     contact.setPhoneNumber(newPhoneNumber);
 
                     System.out.println("Enter new email eg: hello@gmail.com");
                     String newEmail = sc.next();
-                    validateEmail(newEmail);
+                    AddressBookMain.validateEmail(newEmail);
                     contact.setEmail(newEmail);
                     break;
                 } catch (ContactException e) {
@@ -90,30 +91,5 @@ public class AddressBook {
             count--;
             System.out.println("Contact Deleted Successfully...");
         }
-    }
-
-    public static void validateAddress(String address) throws ContactException {
-        if (!Pattern.matches("^[a-zA-Z0-9\\s,.-]+$", address))
-            throw new ContactException("Invalid Address -Check the given eg");
-    }
-
-    public static void validateCityAndState(String cityAndState) throws ContactException {
-        if (!Pattern.matches("^[a-zA-Z\\s]+$", cityAndState))
-            throw new ContactException("Invalid input  -Check the given eg");
-    }
-
-    public static void validateZip(String zip) throws ContactException {
-        if (!Pattern.matches("^[0-9]{6}$", zip))
-            throw new ContactException("Invalid Zip Code  -Check the given eg");
-    }
-
-    public static void validatePhoneNumber(String phoneNumber) throws ContactException {
-        if (!Pattern.matches("[6-9]\\d{9}$", phoneNumber))
-            throw new ContactException("Invalid Phone number  -Check the given eg");
-    }
-
-    public static void validateEmail(String mail) throws ContactException {
-        if (!Pattern.matches("^[a-zA-Z0-9_.*+-]+@[a-zA-Z]+.[a-z]+$", mail))
-            throw new ContactException("Invalid Mail id  -Check the given eg");
     }
 }
