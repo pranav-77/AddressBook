@@ -1,14 +1,15 @@
 package com.pranav;
 
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class AddressBookMain {
-    private static Map<String, AddressBook> addressBooks = new HashMap<>();
+    private static Map<String, AddressBook> addressBooks = new Hashtable<>();
 
-    public static void main(String[] args) throws ContactException {
+    public static void main(String[] args)  {
         Scanner sc = new Scanner(System.in);
         System.out.println("Welcome to the Address Book");
         while (true) {
@@ -75,7 +76,7 @@ public class AddressBookMain {
         }
     }
 
-    public static void manageAddressBook(Scanner sc, AddressBook addressBook) throws ContactException {
+    public static void manageAddressBook(Scanner sc, AddressBook addressBook) {
         while (true) {
             System.out.println("Choose one option");
             System.out.println("1. Add Contact Details");
