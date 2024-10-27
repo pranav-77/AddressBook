@@ -13,9 +13,14 @@ public class AddressBook {
 //    }
 
     public void addContact(Contact contact) {
-        contacts.add(contact);
-        count++;
-        System.out.println("Contact Added Successfully");
+        Contact contact1=findContact(contact.getFirstName(),contact.getLastName());
+        if (contact1==null) {
+            contacts.add(contact);
+            count++;
+            System.out.println("Contact Added Successfully");
+        }else{
+            System.out.println("Contact with same firstname and lastname is already present");
+        }
     }
 
     public void displayContacts() {
@@ -34,7 +39,7 @@ public class AddressBook {
         return null;
     }
 
-    public void editContact(String firstName, String lastName, Scanner sc) throws ContactException {
+    public void editContact(String firstName, String lastName, Scanner sc) {
         Contact contact = findContact(firstName, lastName);
         if (contact == null)
             System.out.println("Contact not found in this name please check whether the typed name is correct");
