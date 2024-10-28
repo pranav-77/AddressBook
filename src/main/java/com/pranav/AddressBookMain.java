@@ -81,7 +81,8 @@ public class AddressBookMain {
             System.out.println("3. Edit Existing Contact");
             System.out.println("4. Delete Existing Contact");
             System.out.println("5. Search contacts by city and state");
-            System.out.println("6. Back to Main Menu");
+            System.out.println("6. Get count of contacts by city or state");
+            System.out.println("7. Back to Main Menu");
             int choice = sc.nextInt();
             sc.nextLine();
             switch (choice) {
@@ -151,9 +152,7 @@ public class AddressBookMain {
                 }
                 case 5: {
                     System.out.println("Do you want to check by city or state? (Enter 'city' or 'state'):");
-
                     String choicee = sc.nextLine().trim().toLowerCase();
-
                     if (choicee.equals("city")) {
                         System.out.println("Enter city name:");
                         String city = sc.nextLine();
@@ -183,7 +182,25 @@ public class AddressBookMain {
                     }
                     break;
                 }
-                case 6: {
+                case 6:{
+                    System.out.println("Do you want to get count by city or state? (Enter 'city' or 'state'):");
+                    String choiceCount = sc.nextLine().trim().toLowerCase();
+                    if (choiceCount.equals("city")) {
+                        System.out.println("Enter city name:");
+                        String city = sc.nextLine();
+                        long count = addressBook.countContactsByCity(city);
+                        System.out.println("Number of contacts in " + city + ": " + count);
+                    } else if (choiceCount.equals("state")) {
+                        System.out.println("Enter state name:");
+                        String state = sc.nextLine();
+                        long count = addressBook.countContactsByState(state);
+                        System.out.println("Number of contacts in " + state + ": " + count);
+                    } else {
+                        System.out.println("Invalid option. Please enter 'city' or 'state'.");
+                    }
+                    break;
+                }
+                case 7: {
                     System.out.println("Backing To Main Menu");
                     return;
                 }
