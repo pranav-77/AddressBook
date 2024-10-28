@@ -106,4 +106,16 @@ public class AddressBook {
                 })
                 .collect(Collectors.toList());
     }
+
+    public long countContactsByCity(String city) {
+        return contacts.stream()
+                .filter(contact -> contact.getCity().equalsIgnoreCase(city))
+                .count();
+    }
+
+    public long countContactsByState(String state) {
+        return contacts.stream()
+                .filter(contact -> contact.getState().equalsIgnoreCase(state))
+                .count();
+    }
 }
