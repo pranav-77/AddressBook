@@ -3,15 +3,11 @@ package com.pranav;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class AddressBook {
     List<Contact> contacts = new ArrayList<>();
     static int count = 0;
-//    public AddressBook(){
-//        this.contacts=new ArrayList<>();
-//    }
-
 
     public void addContact(Contact contact) {
         boolean exists = contacts.stream().anyMatch(c -> c.equals(contact));
@@ -23,7 +19,6 @@ public class AddressBook {
             System.out.println("Contact with the same first name and last name is already present.");
         }
     }
-
 
     public void displayContacts() {
         if (contacts.isEmpty())
@@ -98,5 +93,17 @@ public class AddressBook {
             count--;
             System.out.println("Contact Deleted Successfully...");
         }
+    }
+
+    public List<Contact> getContactsByCityOrState(String value, boolean isCity) {
+        return contacts.stream()
+                .filter(contact -> {
+                    if (isCity) {
+                        return contact.getCity().equalsIgnoreCase(value);
+                    } else {
+                        return contact.getState().equalsIgnoreCase(value);
+                    }
+                })
+                .collect(Collectors.toList());
     }
 }

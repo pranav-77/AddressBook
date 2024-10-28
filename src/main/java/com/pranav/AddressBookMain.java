@@ -2,12 +2,11 @@ package com.pranav;
 
 import java.util.*;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class AddressBookMain {
     private static Map<String, AddressBook> addressBooks = new Hashtable<>();
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Welcome to the Address Book");
         while (true) {
@@ -16,8 +15,7 @@ public class AddressBookMain {
             System.out.println("2. Select an existing Address Book");
             System.out.println("3. Display all Address Book");
             System.out.println("4. Display the contacts of a Particular AddressBook");
-            System.out.println("5. Search contacts by city or state");
-            System.out.println("6. Exit");
+            System.out.println("5. Exit");
             int choice = sc.nextInt();
             sc.nextLine();
             switch (choice) {
@@ -66,36 +64,12 @@ public class AddressBookMain {
                     break;
                 }
                 case 5: {
-                    System.out.println("Enter the city or state to search:");
-                    String location = sc.nextLine();
-                    System.out.println("Search by city? (yes/no)");
-                    boolean searchByCity = sc.nextLine().equalsIgnoreCase("yes");
-                    searchByCityOrState(location, searchByCity);
-                    break;
-                }
-                case 6: {
                     System.out.println("Exiting Program...");
                     System.exit(0);
                 }
                 default:
                     System.out.println("Invalid input Please enter correct option");
             }
-        }
-    }
-
-    private static void searchByCityOrState(String location, boolean searchByCity) {
-        List<Contact> matchingContacts = addressBooks.values().stream()
-                .flatMap(addressBook -> addressBook.contacts.stream())
-                .filter(contact -> searchByCity
-                        ? contact.getCity().equalsIgnoreCase(location)
-                        : contact.getState().equalsIgnoreCase(location))
-                .collect(Collectors.toList());
-
-        if (matchingContacts.isEmpty()) {
-            System.out.println("No contacts found in the specified " + (searchByCity ? "city." : "state."));
-        } else {
-            System.out.println("Contacts found in " + (searchByCity ? "city" : "state") + " " + location + ":");
-            matchingContacts.forEach(System.out::println);
         }
     }
 
@@ -106,8 +80,10 @@ public class AddressBookMain {
             System.out.println("2. Review Contact Details");
             System.out.println("3. Edit Existing Contact");
             System.out.println("4. Delete Existing Contact");
-            System.out.println("5. Back to Main Menu");
+            System.out.println("5. Search contacts by city and state");
+            System.out.println("6. Back to Main Menu");
             int choice = sc.nextInt();
+            sc.nextLine();
             switch (choice) {
                 case 1: {
                     while (true) {
@@ -144,7 +120,7 @@ public class AddressBookMain {
                             String email = sc.next();
                             validateEmail(email);
 
-                            Contact contact = new Contact(firstName, lastName, address, state, city, zip, phoneNumber, email);
+                            Contact contact = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
                             addressBook.addContact(contact);
                             break;
                         } catch (ContactException e) {
@@ -174,6 +150,40 @@ public class AddressBookMain {
                     break;
                 }
                 case 5: {
+                    System.out.println("Do you want to check by city or state? (Enter 'city' or 'state'):");
+
+                    String choicee = sc.nextLine().trim().toLowerCase();
+
+                    if (choicee.equals("city")) {
+                        System.out.println("Enter city name:");
+                        String city = sc.nextLine();
+                        List<Contact> contacts = addressBook.getContactsByCityOrState(city, true);
+                        if (contacts.isEmpty()) {
+                            System.out.println("No contacts found in " + city + ".");
+                        } else {
+                            System.out.println("Contacts found in " + city + ":");
+                            for (Contact contact : contacts) {
+                                System.out.println(contact);
+                            }
+                        }
+                    } else if (choicee.equals("state")) {
+                        System.out.println("Enter state name:");
+                        String state = sc.nextLine();
+                        List<Contact> contacts = addressBook.getContactsByCityOrState(state, false);
+                        if (contacts.isEmpty()) {
+                            System.out.println("No contacts found in " + state + ".");
+                        } else {
+                            System.out.println("Contacts found in " + state + ":");
+                            for (Contact contact : contacts) {
+                                System.out.println(contact);
+                            }
+                        }
+                    } else {
+                        System.out.println("Invalid option. Please enter 'city' or 'state'.");
+                    }
+                    break;
+                }
+                case 6: {
                     System.out.println("Backing To Main Menu");
                     return;
                 }
