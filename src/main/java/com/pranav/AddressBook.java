@@ -12,16 +12,18 @@ public class AddressBook {
 //        this.contacts=new ArrayList<>();
 //    }
 
+
     public void addContact(Contact contact) {
-        Contact contact1=findContact(contact.getFirstName(),contact.getLastName());
-        if (contact1==null) {
+        boolean exists = contacts.stream().anyMatch(c -> c.equals(contact));
+        if (!exists) {
             contacts.add(contact);
             count++;
             System.out.println("Contact Added Successfully");
-        }else{
-            System.out.println("Contact with same firstname and lastname is already present");
+        } else {
+            System.out.println("Contact with the same first name and last name is already present.");
         }
     }
+
 
     public void displayContacts() {
         if (contacts.isEmpty())
