@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class AddressBook {
-    private List<Contact> contacts = new ArrayList<>();
+    List<Contact> contacts = new ArrayList<>();
     static int count = 0;
 //    public AddressBook(){
 //        this.contacts=new ArrayList<>();

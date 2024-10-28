@@ -1,10 +1,8 @@
 package com.pranav;
 
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class AddressBookMain {
     private static Map<String, AddressBook> addressBooks = new Hashtable<>();
@@ -18,7 +16,8 @@ public class AddressBookMain {
             System.out.println("2. Select an existing Address Book");
             System.out.println("3. Display all Address Book");
             System.out.println("4. Display the contacts of a Particular AddressBook");
-            System.out.println("5. Exit");
+            System.out.println("5. Search contacts by city or state");
+            System.out.println("6. Exit");
             int choice = sc.nextInt();
             sc.nextLine();
             switch (choice) {
@@ -67,12 +66,36 @@ public class AddressBookMain {
                     break;
                 }
                 case 5: {
+                    System.out.println("Enter the city or state to search:");
+                    String location = sc.nextLine();
+                    System.out.println("Search by city? (yes/no)");
+                    boolean searchByCity = sc.nextLine().equalsIgnoreCase("yes");
+                    searchByCityOrState(location, searchByCity);
+                    break;
+                }
+                case 6: {
                     System.out.println("Exiting Program...");
                     System.exit(0);
                 }
                 default:
                     System.out.println("Invalid input Please enter correct option");
             }
+        }
+    }
+
+    private static void searchByCityOrState(String location, boolean searchByCity) {
+        List<Contact> matchingContacts = addressBooks.values().stream()
+                .flatMap(addressBook -> addressBook.contacts.stream())
+                .filter(contact -> searchByCity
+                        ? contact.getCity().equalsIgnoreCase(location)
+                        : contact.getState().equalsIgnoreCase(location))
+                .collect(Collectors.toList());
+
+        if (matchingContacts.isEmpty()) {
+            System.out.println("No contacts found in the specified " + (searchByCity ? "city." : "state."));
+        } else {
+            System.out.println("Contacts found in " + (searchByCity ? "city" : "state") + " " + location + ":");
+            matchingContacts.forEach(System.out::println);
         }
     }
 
