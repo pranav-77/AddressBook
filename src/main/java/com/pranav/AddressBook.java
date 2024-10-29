@@ -128,4 +128,25 @@ public class AddressBook {
         displayContacts();
     }
 
+    public void sortByCity() {
+        List<Contact> sortedContacts = contacts.stream()
+                .sorted(Comparator.comparing(Contact::getCity))
+                .collect(Collectors.toList());
+        sortedContacts.forEach(System.out::println);
+    }
+
+    public void sortByState() {
+        List<Contact> sortedContacts = contacts.stream()
+                .sorted(Comparator.comparing(Contact::getState))
+                .collect(Collectors.toList());
+        sortedContacts.forEach(System.out::println);
+    }
+
+    public void sortByZip() {
+        List<Contact> sortedContacts = contacts.stream()
+                .sorted(Comparator.comparing(Contact::getZip))
+                .collect(Collectors.toList());
+        sortedContacts.forEach(System.out::println);
+    }
 }
+
