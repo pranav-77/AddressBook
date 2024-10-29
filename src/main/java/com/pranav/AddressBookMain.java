@@ -230,7 +230,7 @@ public class AddressBookMain {
                             }
                             case 5: {
                                 System.out.println("Back to menu");
-                                manageAddressBook(sc, addressBook);
+                                return;
                             }
                             default: {
                                 System.out.println("Invalid Option Entered");
