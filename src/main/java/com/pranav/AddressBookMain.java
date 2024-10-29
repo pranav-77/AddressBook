@@ -228,11 +228,11 @@ public class AddressBookMain {
                                 addressBook.sortByZip();
                                 break;
                             }
-                            case 5:{
+                            case 5: {
                                 System.out.println("Back to menu");
-                                return;
+                                manageAddressBook(sc, addressBook);
                             }
-                            default:{
+                            default: {
                                 System.out.println("Invalid Option Entered");
                             }
                         }
