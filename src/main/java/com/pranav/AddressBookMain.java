@@ -82,7 +82,7 @@ public class AddressBookMain {
             System.out.println("4. Delete Existing Contact");
             System.out.println("5. Search contacts by city and state");
             System.out.println("6. Get count of contacts by city or state");
-            System.out.println("7. Sort the contacts by alphabet");
+            System.out.println("7. Sort the contacts");
             System.out.println("8. Back to Main Menu");
             int choice = sc.nextInt();
             sc.nextLine();
@@ -183,7 +183,7 @@ public class AddressBookMain {
                     }
                     break;
                 }
-                case 6:{
+                case 6: {
                     System.out.println("Do you want to get count by city or state? (Enter 'city' or 'state'):");
                     String choiceCount = sc.nextLine().trim().toLowerCase();
                     if (choiceCount.equals("city")) {
@@ -201,10 +201,42 @@ public class AddressBookMain {
                     }
                     break;
                 }
-                case 7:{
-                    addressBook.sortContacts();
-                    System.out.println("The Contacts Are Sorted Alphabetically");
-                    break;
+                case 7: {
+                    while (true) {
+                        System.out.println("Enter the choice");
+                        System.out.println("1. SORT BY NAME");
+                        System.out.println("2. SORT BY CITY");
+                        System.out.println("3. SORT BY STATE");
+                        System.out.println("4. SORT BY ZIP");
+                        System.out.println("5. BACK TO MENU");
+                        int option = sc.nextInt();
+                        sc.nextLine();
+                        switch (option) {
+                            case 1: {
+                                addressBook.sortContacts();
+                                break;
+                            }
+                            case 2: {
+                                addressBook.sortByCity();
+                                break;
+                            }
+                            case 3: {
+                                addressBook.sortByState();
+                                break;
+                            }
+                            case 4: {
+                                addressBook.sortByZip();
+                                break;
+                            }
+                            case 5:{
+                                System.out.println("Back to menu");
+                                return;
+                            }
+                            default:{
+                                System.out.println("Invalid Option Entered");
+                            }
+                        }
+                    }
                 }
                 case 8: {
                     System.out.println("Backing To Main Menu");
