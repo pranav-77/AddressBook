@@ -103,7 +103,7 @@ public class Contact {
 
     @Override
     public String toString() {
-        return "Contact Details:\n" + "FIRST NAME: " + firstName + "\n" + "LAST NAME: " + lastName + "\n" + "ADDRESS: " + address + "\n" + "CITY: " + city + "\n" + "STATE: " + state + "\n" + "ZIP: " + zip + "\n" + "PHONE NO: " + phoneNumber + "\n" + "EMAIL: " + email + "\n" + "\n";
+        return "Contact Details:\n" + "FIRST NAME: " + firstName + "\n" + "LAST NAME: " + lastName + "\n" + "ADDRESS: " + address + "\n" + "CITY: " + city + "\n" + "STATE: " + state + "\n" + "ZIP: " + zip + "\n" + "PHONE NO: " + phoneNumber + "\n" + "EMAIL: " + email + "\n";
     }
 }
 
