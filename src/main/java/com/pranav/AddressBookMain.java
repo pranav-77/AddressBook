@@ -82,7 +82,8 @@ public class AddressBookMain {
             System.out.println("4. Delete Existing Contact");
             System.out.println("5. Search contacts by city and state");
             System.out.println("6. Get count of contacts by city or state");
-            System.out.println("7. Back to Main Menu");
+            System.out.println("7. Sort the contacts by alphabet");
+            System.out.println("8. Back to Main Menu");
             int choice = sc.nextInt();
             sc.nextLine();
             switch (choice) {
@@ -200,7 +201,12 @@ public class AddressBookMain {
                     }
                     break;
                 }
-                case 7: {
+                case 7:{
+                    addressBook.sortContacts();
+                    System.out.println("The Contacts Are Sorted Alphabetically");
+                    break;
+                }
+                case 8: {
                     System.out.println("Backing To Main Menu");
                     return;
                 }

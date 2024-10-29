@@ -1,6 +1,7 @@
 package com.pranav;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -118,4 +119,13 @@ public class AddressBook {
                 .filter(contact -> contact.getState().equalsIgnoreCase(state))
                 .count();
     }
+
+    public void sortContacts() {
+        contacts = contacts.stream()
+                .sorted(Comparator.comparing(Contact::getFirstName).thenComparing(Contact::getLastName))
+                .collect(Collectors.toList());
+        System.out.println("Contacts sorted alphabetically by name:");
+        displayContacts();
+    }
+
 }
